@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Infrastructure\Repository;
 
 use App\Domain\Entity\ProductTag;
 use App\Domain\Repository\ProductTagRepositoryInterface;
