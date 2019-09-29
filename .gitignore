@@ -1,4 +1,8 @@
 
+###> global ###
+.idea
+###< global ###
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
