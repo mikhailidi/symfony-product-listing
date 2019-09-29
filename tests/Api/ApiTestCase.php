@@ -24,5 +24,4 @@ class ApiTestCase extends WebTestCase
 
         exec('bin/console doctrine:migrations:migrate -n');
     }
-
 }
