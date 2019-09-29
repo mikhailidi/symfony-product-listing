@@ -2,6 +2,7 @@
 
 namespace App\Tests\Api\Controller;
 
+use App\Domain\Entity\Product;
 use App\Tests\Api\ApiTestCase;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,14 @@ class ProductControllerTest extends ApiTestCase
         $this->entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        $this->entityManager->close();
+        $this->entityManager = null;
     }
 
     /**

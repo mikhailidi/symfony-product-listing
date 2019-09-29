@@ -21,6 +21,8 @@ class ApiTestCase extends WebTestCase
     {
         parent::setUp();
         $this->client = self::createClient();
+
+        exec('bin/console doctrine:migrations:migrate -n');
     }
 
 }
