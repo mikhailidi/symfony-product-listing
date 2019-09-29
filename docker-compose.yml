@@ -1,0 +1,38 @@
+version: '3'
+services:
+    apache:
+        build: .docker/apache
+        container_name: sf4_apache
+        ports:
+          - 80:80
+        volumes:
+          - .docker/config/vhosts:/etc/apache2/sites-enabled
+          - .:/home/wwwroot
+        depends_on:
+          - php
+
+    mysql:
+        image: mysql:5.7
+        container_name: symfony-db
+        hostname: symfony-db
+        restart: always
+        ports:
+          - 3306:3306
+        expose:
+          - 3306
+        environment:
+          - MYSQL_ROOT_PASSWORD=password
+          - MYSQL_DATABASE=product-listing
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=password
+          - MYSQL_ROOT_HOST=%
+        volumes:
+          - .docker/config/mysql.conf:/etc/mysql/my.cnf
+
+    php:
+        build: .docker/php
+        container_name: sf4_php
+        volumes:
+          - .:/home/wwwroot
+        depends_on:
+          - mysql
