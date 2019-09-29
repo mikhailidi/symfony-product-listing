@@ -3,6 +3,7 @@
 namespace App\Domain\Factory;
 
 use App\Domain\Entity\Product;
+use App\Domain\Entity\ProductTag;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -15,16 +16,21 @@ class ProductFactory
      * Create a new product Entity.
      *
      * @param array $productData Product data
+     * @param ProductTag[] $productTags Product tags
      * @return Product
      * @throws \Exception
      */
-    public function createProduct(array $productData)
+    public function createProduct(array $productData, array $productTags)
     {
-        return new Product(
+        $product = new Product(
             $this->getId($productData),
             $this->getName($productData),
             $this->getDescription($productData)
         );
+
+        $product->addTags($productTags);
+
+        return $product;
     }
 
     /**

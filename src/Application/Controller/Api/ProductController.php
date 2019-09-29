@@ -4,7 +4,6 @@ namespace App\Application\Controller\Api;
 
 use App\Application\Controller\ApiController;
 use App\Application\Service\ProductApplicationService;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -38,9 +37,10 @@ class ProductController extends ApiController
      */
     public function create(Request $request)
     {
-        $this->validateProductCreationRequest($request->request->all());
+        $requestData = $this->decodeJsonData($request->getContent());
+        $this->validateProductCreationRequest($requestData);
 
-        $this->applicationService->createProduct($request->request->all());
+        $this->applicationService->createProduct($requestData);
 
         return $this->created();
     }
@@ -65,6 +65,13 @@ class ProductController extends ApiController
             'description' => [
                 new Assert\NotBlank(),
                 new Assert\Type(['type' => 'string']),
+            ],
+            'tags' => [
+                new Assert\Type('array'),
+                new Assert\Count(['min' => 1]),
+                new Assert\Collection([
+                    new Assert\Type(['type' => 'string']),
+                ]),
             ],
         ]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -47,14 +48,13 @@ class Product
      * @param string $id
      * @param string $name
      * @param string $description
-     * @param Collection $tags
      */
-    public function __construct(string $id, string $name, string $description, Collection $tags)
+    public function __construct(string $id, string $name, string $description)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
-        $this->tags = $tags;
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -87,5 +87,51 @@ class Product
     public function getTags(): Collection
     {
         return $this->tags;
+    }
+
+    /**
+     * Associate ProductTag with the Product.
+     *
+     * @param ProductTag $tag Product tag to add
+     * @return Product
+     */
+    public function addTag(ProductTag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $tag->addProduct($this);
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Associate multiple ProductTags with the Product.
+     *
+     * @param ProductTag[] $productTags Array of product tags
+     * @return Product
+     */
+    public function addTags(array $productTags): self
+    {
+        foreach ($productTags as $tag) {
+            $this->addTag($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove ProductTag from the Product.
+     *
+     * @param ProductTag $tag Product tag to remove
+     * @return Product
+     */
+    public function removeTag(ProductTag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+
+        return $this;
     }
 }
