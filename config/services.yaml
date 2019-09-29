@@ -23,5 +23,10 @@ services:
         resource: '../src/Application/Controller'
         tags: ['controller.service_arguments']
 
+    # the ``App\Infrastructure\Repository\ProductDoctrineRepository`` will be injected when
+    # an ``App\Domain\Repository\ProductRepositoryInterface:`` type-hint is detected
+    App\Infrastructure\Repository\ProductDoctrineRepository: ~
+    App\Domain\Repository\ProductRepositoryInterface: '@App\Infrastructure\Repository\ProductDoctrineRepository'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
