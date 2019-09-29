@@ -39,7 +39,7 @@ class ProductTag
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=150)
      */
     private $slug;
 
