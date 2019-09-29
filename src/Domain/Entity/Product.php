@@ -2,6 +2,7 @@
 
 namespace App\Domain\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,16 +36,25 @@ class Product
     private $description;
 
     /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Domain\Entity\ProductTag", mappedBy="product")
+     */
+    private $tags;
+
+    /**
      * Product constructor.
      * @param string $id
      * @param string $name
      * @param string $description
+     * @param Collection $tags
      */
-    public function __construct(string $id, string $name, string $description)
+    public function __construct(string $id, string $name, string $description, Collection $tags)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->tags = $tags;
     }
 
     /**
@@ -69,5 +79,13 @@ class Product
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
     }
 }
