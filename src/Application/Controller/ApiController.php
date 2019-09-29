@@ -52,4 +52,15 @@ class ApiController
             throw new BadRequestHttpException(json_encode($errors));
         }
     }
+
+    /**
+     * Transform request's json data into associated array.
+     *
+     * @param string $json Json string
+     * @return array
+     */
+    protected function decodeJsonData(string $json): array
+    {
+        return json_decode($json, true);
+    }
 }
