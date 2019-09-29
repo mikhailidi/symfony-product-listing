@@ -28,5 +28,10 @@ services:
     App\Infrastructure\Repository\ProductDoctrineRepository: ~
     App\Domain\Repository\ProductRepositoryInterface: '@App\Infrastructure\Repository\ProductDoctrineRepository'
 
+    # the ``App\Infrastructure\Repository\ProductDoctrineRepository`` will be injected when
+    # an ``App\Domain\Repository\ProductRepositoryInterface:`` type-hint is detected
+    App\Infrastructure\Repository\ProductTagDoctrineRepository: ~
+    App\Domain\Repository\ProductTagRepositoryInterface: '@App\Infrastructure\Repository\ProductTagDoctrineRepository'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
