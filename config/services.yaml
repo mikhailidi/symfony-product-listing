@@ -19,9 +19,19 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+    App\Application\Controller\:
+        resource: '../src/Application/Controller'
         tags: ['controller.service_arguments']
+
+    # the ``App\Infrastructure\Repository\ProductDoctrineRepository`` will be injected when
+    # an ``App\Domain\Repository\ProductRepositoryInterface:`` type-hint is detected
+    App\Infrastructure\Repository\ProductDoctrineRepository: ~
+    App\Domain\Repository\ProductRepositoryInterface: '@App\Infrastructure\Repository\ProductDoctrineRepository'
+
+    # the ``App\Infrastructure\Repository\ProductDoctrineRepository`` will be injected when
+    # an ``App\Domain\Repository\ProductRepositoryInterface:`` type-hint is detected
+    App\Infrastructure\Repository\ProductTagDoctrineRepository: ~
+    App\Domain\Repository\ProductTagRepositoryInterface: '@App\Infrastructure\Repository\ProductTagDoctrineRepository'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
