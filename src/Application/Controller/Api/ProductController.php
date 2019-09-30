@@ -62,16 +62,13 @@ class ProductController extends ApiController
                 new Assert\NotBlank(),
                 new Assert\Type(['type' => 'string']),
             ],
-            'description' => [
-                new Assert\NotBlank(),
+            'description' => new Assert\Optional([
+                new Assert\Optional(),
                 new Assert\Type(['type' => 'string']),
-            ],
+            ]),
             'tags' => [
                 new Assert\Type('array'),
                 new Assert\Count(['min' => 1]),
-                new Assert\Collection([
-                    new Assert\Type(['type' => 'string']),
-                ]),
             ],
         ]);
 
