@@ -42,7 +42,7 @@
                     </label>
                 </div>
             </fieldset>
-            
+
             <button type="submit" class="btn btn-primary">Create</button>
         </fieldset>
     </form>
@@ -52,9 +52,45 @@
 {% block javascripts %}
     <script src="{{ asset('js/parsley.min.js') }}"></script>
     <script>
-        $('#form').parsley();
+        let instance = $('#form').parsley();
         $('#form').on('submit', function (event) {
              event.preventDefault();
+             if (!instance.isValid()) {
+                 return;
+             }
+
+             let productName = $('#productName').val(),
+                 productDescription = $('#productDescription').val(),
+                 productTags = [];
+
+             $('input[name="product-tag"]:checked').each(function () {
+                productTags.push($(this).val());
+             });
+
+             let data = new Object();
+             data.name = productName;
+             data.description = productDescription;
+             data.tags = productTags;
+             data = JSON.stringify(data);
+
+
+             let request = $.ajax({
+                 url: 'http://localhost/api/products',
+                 type: 'POST',
+                 data: data,
+                 headers: {
+                     'Accept': 'application/json',
+                     'Content-Type': 'application/json'
+                 }
+             });
+
+             request.done(function (response) {
+                 alert('success!')
+             });
+             request.error(function (error) {
+                 console.log(error);
+             });
+
         });
     </script>
 {% endblock %}
