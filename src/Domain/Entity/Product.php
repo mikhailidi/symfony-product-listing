@@ -44,6 +44,13 @@ class Product
     private $tags;
 
     /**
+     * @var ProductImage
+     *
+     * @ORM\OneToOne(targetEntity="App\Domain\Entity\ProductImage", mappedBy="product")
+     */
+    private $image;
+
+    /**
      * Product constructor.
      * @param string $id
      * @param string $name
@@ -130,6 +137,20 @@ class Product
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ProductImage $image
+     * @return Product
+     */
+    public function addImage(ProductImage $image): self
+    {
+        if (!$this->image) {
+            $this->image->addProduct($this);
+            $this->image = $image;
         }
 
         return $this;
