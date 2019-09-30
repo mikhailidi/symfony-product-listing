@@ -29,7 +29,7 @@ class ProductController extends ApiController
     }
 
     /**
-     * @Route("/api/products", methods={"POST"}, name="api.article.create")
+     * @Route("/api/products", methods={"POST"}, name="api.product.create")
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
