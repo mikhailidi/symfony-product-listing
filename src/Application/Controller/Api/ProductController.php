@@ -40,9 +40,10 @@ class ProductController extends ApiController
         $requestData = $this->decodeJsonData($request->getContent());
         $this->validateProductCreationRequest($requestData);
 
-        $this->applicationService->createProduct($requestData);
+        $product = $this->applicationService->createProduct($requestData);
 
-        return $this->created();
+
+        return $this->created('/api/products/' . $product->getId());
     }
 
     /**
