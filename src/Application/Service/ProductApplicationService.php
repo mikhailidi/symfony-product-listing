@@ -2,6 +2,7 @@
 
 namespace App\Application\Service;
 
+use App\Domain\Entity\Product;
 use App\Domain\Factory\ProductFactory;
 use App\Domain\Repository\ProductRepositoryInterface;
 use App\Domain\Repository\ProductTagRepositoryInterface;
@@ -50,15 +51,17 @@ class ProductApplicationService
      * Trigger create product command.
      *
      * @param array $data Request data
-     * @return void
+     * @return Product
      * @throws \Exception
      */
-    public function createProduct(array $data): void
+    public function createProduct(array $data): Product
     {
         $productTags = $this->productTagRepository->findBy(['id' => $data['tags']]);
 
         $product = $this->factory->createProduct($data, $productTags);
 
         $this->repository->save($product);
+
+        return $product;
     }
 }
