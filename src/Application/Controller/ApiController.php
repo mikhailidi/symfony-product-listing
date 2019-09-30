@@ -16,12 +16,16 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ApiController
 {
     /**
+     * @param null|string $location
      * @return Response
      */
-    protected function created()
+    protected function created(?string $location = null)
     {
         $response = new Response();
         $response->setStatusCode(Response::HTTP_CREATED);
+        if ($location) {
+            $response->headers->set('Location', $location);
+        }
 
         return $response;
     }
