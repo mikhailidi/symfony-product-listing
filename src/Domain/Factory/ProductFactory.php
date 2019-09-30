@@ -60,6 +60,8 @@ class ProductFactory
      */
     private function getDescription(array $productData): string
     {
-        return $productData['description'];
+        return isset($productData['description'])
+            ? $productData['description']
+            : '';
     }
 }

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <form id="form" data-parsley-validate enctype="multipart/form-data">
+        <fieldset>
+            <legend>Create a new product</legend>
+            <div class="form-group">
+                <label for="productName">Product name</label>
+                <input type="text" class="form-control" id="productName" aria-describedby="pdocutImageHelp" placeholder="Product name..." required>
+                <small id="productNameHelp" class="form-text text-muted">Required value.</small>
+            </div>
+            <div class="form-group">
+                <label for="productDescription">Product description</label>
+                <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter a product description..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="productImage">Product image</label>
+                <input type="file" class="form-control-file" id="productImage" aria-describedby="pdocutImageHelp">
+                <small id="productImageHelp" class="form-text text-muted">Upload an image for your product.</small>
+                <textarea style="visibility: hidden;" id="base"></textarea>
+            </div>
+
+            <!-- PRODUCT TAGS -->
+            <fieldset class="form-group">
+                <legend>Add product tags</legend>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="d651cacc-5143-40a9-b269-cd68c283c59c" name="product-tag" data-parsley-mincheck="1" data-parsley-required="true">
+                        Dummy Tag 1
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="53c15cd5-6b47-4385-b012-3ce796d26aac" name="product-tag" data-parsley-mincheck="1" data-parsley-required="true">
+                        Dummy Tag 2
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="03110166-8d82-46de-8585-da4aa57f8170" name="product-tag" data-parsley-mincheck="1" data-parsley-required="true">
+                        Dummy Tag 3
+                    </label>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </fieldset>
+    </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/parsley.min.js') }}"></script>
+    <script src="{{ asset('js/createProduct.js') }}"></script>
+{% endblock %}

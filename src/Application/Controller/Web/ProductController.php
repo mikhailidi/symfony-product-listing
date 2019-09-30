@@ -20,4 +20,14 @@ class ProductController extends AbstractController
     {
         return $this->render('product/index.html.twig');
     }
+
+    /**
+     * @Route("/product/create", methods={"GET"}, name="product.create")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function create()
+    {
+       return $this->render('product/create.html.twig');
+    }
 }
