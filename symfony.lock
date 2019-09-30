@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.2.0"
+    },
     "dama/doctrine-test-bundle": {
         "version": "4.0",
         "recipe": {
@@ -108,6 +111,9 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.37"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },
@@ -120,6 +126,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "league/flysystem": {
+        "version": "1.0.55"
+    },
     "monolog/monolog": {
         "version": "1.25.1"
     },
@@ -131,6 +140,18 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "oneup/flysystem-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0eb87bba411c227da027fe5f7c1dc7954b02f242"
+        },
+        "files": [
+            "config/packages/oneup_flysystem.yaml"
+        ]
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"

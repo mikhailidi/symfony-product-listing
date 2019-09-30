@@ -25,3 +25,7 @@
 ###> docker ###
 .docker/data/*
 ###< docker ###
+
+###> upload ###
+public/uploads
+###< docker ###
